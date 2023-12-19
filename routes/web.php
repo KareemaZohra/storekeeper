@@ -20,3 +20,11 @@ Route::get('/', function () {
 
 Route::get('/add-product',[products_controller::class,'show']);
 Route::post('/add-product',[products_controller::class,'add']);
+
+Route::get('/products',[products_controller::class,'showProducts']);
+
+Route::get('/buy/{id}',[products_controller::class,'buy']);
+
+Route::get('/dashboard',[products_controller::class,'showDashboard']);
+
+Route::get('/transaction',[products_controller::class,'showTransactions']);
