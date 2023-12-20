@@ -12,7 +12,11 @@
                                 <span>Price : {{ $product->price }}</span> <br>
                                 <span>Quantity : {{ $product->quantity }}</span>
                             </p>
-                            <a href="/buy/{{$product->id}}" class="btn btn-primary">Buy now</a>
+                            <form action="/buy" method="post">
+                                @csrf
+                                <input type="hidden" name="id" value="{{$product->id}}">
+                                <button type="submit" class="btn btn-primary">Buy now</button>
+                            </form>
                         </div>
                     </div>
                 </div>

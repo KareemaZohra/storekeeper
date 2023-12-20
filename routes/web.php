@@ -23,7 +23,7 @@ Route::post('/add-product',[products_controller::class,'add']);
 
 Route::get('/products',[products_controller::class,'showProducts']);
 
-Route::get('/buy/{id}',[products_controller::class,'buy']);
+Route::post('/buy',[products_controller::class,'buy']);
 
 Route::get('/dashboard',[products_controller::class,'showDashboard']);
 

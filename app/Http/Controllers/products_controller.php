@@ -31,7 +31,8 @@ class products_controller extends Controller
         return view('productDisplay',['products'=>$products]);
     }
 
-    public function buy($id){
+    public function buy(Request $request){
+        $id = $request->id;
         $product =  DB::table('products')->where('id',$id)->first();
 
         DB::table('orders')->insert([
