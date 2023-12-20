@@ -53,18 +53,29 @@ class products_controller extends Controller
     }
 
     public function showDashboard(){
-        $today = now();
+        $today = now()->toDateString();
         $yesterday = Carbon::yesterday();
+        $thirtyDaysAgo = Carbon::now()->subDays(30);
+        $sixtyDaysAgo = Carbon::now()->subDays(60);
+
         $saleToday = DB::table('orders')
-            ->where('updated_at','>',$yesterday)
+            ->where('updated_at','>=',$today)
             ->sum('price');
 
         $saleYesterday = DB::table('orders')
             ->where('updated_at','>=',$yesterday)
             ->where('updated_at','<',$today)
             ->sum('price');
-        $saleThisMonth = 40;
-        $saleLastMonth = 50;
+
+        $saleThisMonth = DB::table('orders')
+            ->where('updated_at','>=',$thirtyDaysAgo)
+            ->sum('price');
+
+        $saleLastMonth = DB::table('orders')
+            ->where('updated_at','>=',$sixtyDaysAgo)
+            ->where('updated_at','<',$thirtyDaysAgo)
+            ->sum('price');
+
         return view('dashboard',compact('saleToday','saleYesterday','saleThisMonth','saleLastMonth'));
     }
 
